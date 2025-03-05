@@ -12,6 +12,8 @@ public class UI extends JFrame implements MouseMotionListener {
     private boolean isEraser = false;
     private int x = 0;
     private int y = 0;
+    private int penSize = 5;
+    private Slider slider;
 
     UI() {
         setSize(700, 1000);
@@ -32,7 +34,8 @@ public class UI extends JFrame implements MouseMotionListener {
                 Graphics g = getGraphics();
                 g.setColor(Color.white);
                 g.fillRect(0, 131, 700, 800);
-                g.fillRect(458,0,250,131);
+                g.fillRect(458,70,250,131);
+                g.fillRect(0, 0, 100, 100);
 
             }
         });
@@ -207,6 +210,9 @@ public class UI extends JFrame implements MouseMotionListener {
         });
 
         add(brushButton);
+        slider = new Slider(200, 50, 5);
+        slider.setBounds(450, 0, 200, 50);
+        add(slider);
 
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -236,8 +242,16 @@ public class UI extends JFrame implements MouseMotionListener {
             x = e.getX();
             y = e.getY();
 
+        penSize = slider.getPenSize(); // Отримуємо розмір кисті з повзунка
+        g.fillOval(e.getX(), e.getY(), penSize, penSize);
+
+
+
+
+
 
         }
+
 
         @Override
         public void mouseMoved (MouseEvent e){
